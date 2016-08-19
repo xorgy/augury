@@ -3,6 +3,7 @@
 
 html,
 body {
+  background-color: inherit !important;
   font-size: 11px;
   font-family: '.SFNSDisplay-Regular', 'Helvetica Neue', 'Lucida Grande', sans-serif;
 }
