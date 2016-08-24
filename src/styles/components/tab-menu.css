@@ -1,9 +1,15 @@
 
 /* Tab Menu */
 
+bt-tab-menu header {
+  -webkit-user-select: none;
+  height: 26px;
+}
+
 .tab-menu-title {
   cursor: pointer;
   font-size: var(--tab-menu-title);
+  padding-top: 3px;
 }
 
 .light {

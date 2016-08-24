@@ -4,13 +4,13 @@
    [selectedTabIndex]="selectedTabIndex">
 </bt-tab-menu>
 
-<split-pane class="flex flex-auto">
-  <split-pane-primary-content
-     class="flex flex-column flex-auto"
-     [ngClass]="{'overflow-scroll': selectedTabIndex > 0}">
+<split-pane
+   class="flex-auto"
+   [ngClass]="{ 'flex': selectedTabIndex === 0 }"
+   [hidden]="selectedTabIndex !== 0">
+  <split-pane-primary-content class="flex flex-column flex-auto">
     <bt-tree-view
-       [hidden]="selectedTabIndex != 0"
-       [ngClass]="{flex: selectedTabIndex == 0}"
+       class="flex"
        [changedNodes]="changedNodes"
        [selectedNode]="selectedNode"
        [closedNodes]="closedNodes"
@@ -18,10 +18,7 @@
        [allowedComponentTreeDepth]="allowedComponentTreeDepth">
     </bt-tree-view>
   </split-pane-primary-content>
-  <split-pane-secondary-content
-     class="flex flex-column flex-auto"
-     [ngClass]="{'flex': selectedTabIndex === 0}"
-     [hidden]="selectedTabIndex > 0">
+  <split-pane-secondary-content class="flex flex-column flex-auto">
     <bt-info-panel
        class="flex flex-column flex-auto bg-white"
        [tree]="tree"
@@ -34,6 +31,6 @@
 <bt-router-tree
    class="overflow-scroll flex-auto"
    [theme]="theme"
-   [hidden]="selectedTabIndex != 1"
+   [hidden]="selectedTabIndex !== 1"
    [routerTree]="routerTree">
 </bt-router-tree>

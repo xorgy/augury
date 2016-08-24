@@ -5,7 +5,7 @@ import {Component, EventEmitter, OnChanges, Input, Output} from '@angular/core';
   templateUrl: '/src/frontend/components/tab-menu/tab-menu.html'
 })
 export default class TabMenu {
-  @Input() tabs: any;
+  @Input() tabs: Array<string>;
   @Input() selectedTabIndex: number = 0;
   @Output() tabChange: EventEmitter<number> = new EventEmitter<number>();
 
@@ -13,14 +13,7 @@ export default class TabMenu {
     this.tabClick(this.selectedTabIndex);
   }
 
-  tabClick(index: number) {
-    this.tabs.forEach((t) => {
-      t.selected = false;
-    });
-
-    this.tabs[index].selected = true;
-
-    const selected = this.tabs.filter((t) => t.selected);
+  tabClick(index: number): void {
     this.tabChange.emit(index);
   }
 

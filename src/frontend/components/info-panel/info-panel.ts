@@ -22,13 +22,10 @@ export class InfoPanel {
   @Input() theme: string;
 
   private selectedTabIndex: number = 0;
-  private tabs = [{
-      title: 'Properties',
-      selected: false
-    }, {
-      title: 'Injector Graph',
-      selected: false
-    }];
+  private tabs = [
+    'Properties',
+    'Injector Graph'
+  ];
 
   constructor(
     private componentDataStore: ComponentDataStore,

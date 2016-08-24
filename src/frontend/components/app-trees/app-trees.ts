@@ -27,13 +27,10 @@ export default class AppTrees {
 
   @Output() tabChange: EventEmitter<number> = new EventEmitter<number>();
 
-  private tabs = [{
-    title: 'Component Tree',
-    selected: false
-  }, {
-    title: 'Router Tree',
-    selected: false
-  }];
+  private tabs = [
+    'Component Tree',
+    'Router Tree',
+  ];
 
   tabClicked(index: number): void {
     this.tabChange.emit(index);
