@@ -1,21 +1,85 @@
-.primary-color {
-  color: var(--grey-darkest);
-}
-​
-.secondary-color {
-  color: var(--blue-dark);
-}
-​
-.tertiary-color {
-  color: var(--green);
-}
-​
-.quaternary-color {
-  color: var(--red-dark);
+.light {
+  background-color: white;
+
+  & .bg-panel {
+    background-color: rgba(0, 0, 0, .0625);
+  }
+
+  & .bg-white {
+    background-color: white;
+  }
+
+  & .border-color-dark {
+    border-color: var(--grey-dark);
+  }
+
+  & .primary-color {
+    color: var(--grey-darkest);
+  }
+
+  & split-pane-secondary-content {
+    border-left: 1px solid rgb(64%, 64%, 64%);
+  }
+
+  & .border-bottom {
+    border-bottom-color: #CCC;
+  }
+
+  & .border-right {
+    border-right-color: #CCC;
+  }
+
+  & .border-top {
+    border-top-color: #CCC;
+  }
+
+  & .border-left {
+    border-left-color: #CCC;
+  }
 }
 
-.border-color-dark {
-  border-color: var(--grey-dark);
+.dark {
+  background-color: rgb(36, 36, 36);
+
+  & .bg-panel {
+    background-color: rgb(42, 42, 42);
+  }
+
+  & .bg-white {
+    background-color: rgb(36, 36, 36);
+  }
+
+  & .border-color-dark {
+    border-color: rgb(61, 61, 61);
+  }
+
+  & .primary-color {
+    color: rgb(165, 165, 165);
+  }
+
+  & .selected-color {
+    color: rgb(204, 204, 204);
+  }
+
+  & split-pane-secondary-content {
+    border-left: 1px solid rgb(92, 92, 92);
+  }
+
+  & .border-bottom {
+    border-bottom-color: rgb(61, 61, 61);
+  }
+
+  & .border-right {
+    border-right-color: rgb(61, 61, 61);
+  }
+
+  & .border-top {
+    border-top-color: rgb(61, 61, 61);
+  }
+
+  & .border-left {
+    border-left-color: rgb(61, 61, 61);
+  }
 }
 
 .red-1 {

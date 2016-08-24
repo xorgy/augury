@@ -14,10 +14,6 @@ bt-tab-menu > header {
   padding-left: 5px;
 }
 
-split-pane-secondary-content {
-  border-left: 1px solid rgb(92, 92, 92);
-}
-
 .monospace {
   font-family: 'Menlo', monospace;
 }
@@ -30,25 +26,9 @@ split-pane-secondary-content {
   max-height: 100%;
 }
 
-.tab-menu-title {
-  cursor: pointer;
-  font-size: var(--tab-menu-title);
-
-  &:hover {
-    background-color: var(--grey-medium);
-  }
-}
 
 .pointer {
   cursor: pointer;
-}
-
-.bg-panel {
-  background-color: rgba(0, 0, 0, .0625);
-}
-
-.bg-white {
-  background-color: #fff;
 }
 
 .border-transparent {

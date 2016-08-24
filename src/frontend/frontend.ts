@@ -33,7 +33,7 @@ const ALLOWED_DEPTH: number = 3;
   directives: [AppTrees, Header, InfoPanel, SplitPane, TreeView],
   template: `
     <div class="clearfix vh-100 overflow-hidden flex flex-column"
-      [ngClass]="{'dark': theme === 'dark'}">
+      [ngClass]="theme">
       <augury-header
         [searchDisabled]="searchDisabled"
         [theme]="theme"
@@ -78,11 +78,7 @@ export class App {
     chrome.storage.sync.get('theme', (result: any) => {
       // Run in Angular zone so that theme change is detected.
       this._ngZone.run(() => {
-        if (result.theme === 'dark') {
-          this.theme = result.theme;
-        } else {
-          this.theme = 'light'; // default theme
-        }
+        this.theme = result.theme === 'dark' ? 'dark' : 'light';
       });
     });
 

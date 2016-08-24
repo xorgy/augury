@@ -1,0 +1,20 @@
+
+/* Tab Menu */
+
+.tab-menu-title {
+  cursor: pointer;
+  font-size: var(--tab-menu-title);
+}
+
+.light {
+  & .tab-menu-title:hover {
+    background-color: var(--grey-medium);
+  }
+}
+
+.dark {
+  & .tab-menu-title:hover {
+    color: rgb(204, 204, 204);
+    background-color: rgb(49, 49, 49);
+  }
+}

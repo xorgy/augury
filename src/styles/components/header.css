@@ -3,25 +3,45 @@
 
 .setting {
   -webkit-mask-position: -200px -29px;
-  background-color: var(--grey-darkest);
   height: 16px;
   margin: auto;
   width: 16px;
 }
 
-.setting-dropdown {
-  background: var(--grey-light);
-}
-
-.setting-dropdown--dark {
-  background: var(--grey-darkest);
-  color: var(--grey-light);
-}
-
 .setting-dropdown li {
-  padding-left: 2rem;
+  -webkit-user-select: none;
+  padding-left: 1rem;
 }
 
-.setting-dropdown li.selected {
+.setting-dropdown input {
+  vertical-align: text-bottom;
+}
 
+.light {
+  & .setting {
+    background-color: var(--grey-darkest);
+
+    &:hover {
+      background-color: #333;
+    }
+  }
+
+  & .setting-dropdown {
+    background: var(--grey-light);
+  }
+}
+
+.dark {
+  & .setting {
+    background-color: #A5A5A5 !important;
+
+    &:hover {
+      background-color: #CCCCCC;
+    }
+  }
+
+  & .setting-dropdown {
+    background: var(--grey-darkest);
+    color: var(--grey-light);
+  }
 }

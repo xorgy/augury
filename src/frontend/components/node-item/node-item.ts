@@ -20,8 +20,7 @@ import {UserActions} from '../../actions/user-actions/user-actions';
         [ngClass]="{'node-item-selected':isSelected,'changed': isUpdated}">
         <img src="../images/Triangle.svg"
           style="width: 0.8em; height: 0.8em;"
-          [hidden]="node.children ? false : true"
-          [ngClass]="{rotate90: showChildren()}"
+          [ngClass]="{rotate90: showChildren(), transparent: !node.children}"
           (click)="expandTree($event)">
         <div class="inline"
           [innerHTML]="getNodeDetails(node)">

@@ -14,10 +14,8 @@
 }
 
 .info-editable {
-  background-color: var(--bt-editable-highlight-color);
-  border-bottom: dashed blue 1px !important;
+  border-bottom: dashed 1px !important;
   border: 0;
-  color: var(--bt-editable-color);
   display: inline-block;
 
   &:focus {
@@ -39,4 +37,20 @@ bt-component-info a:hover {
 
 bt-dependency ul li:last-child {
   border-bottom: none;
+}
+
+.light {
+  & .info-editable {
+    background-color: var(--bt-editable-highlight-color);
+    border-bottom-color: blue;
+    color: var(--bt-editable-color);
+  }
+}
+
+.dark {
+  & .info-editable {
+    background-color: rgb(36, 36, 36);
+    border-bottom-color: rgb(189, 198, 207);
+    color: rgb(189, 198, 207);
+  }
 }
