@@ -19,8 +19,8 @@ import {ComponentDataStore}
   }
 })
 export class Header {
-
-  @Input() searchDisabled: boolean;
+  @Input() selectedTabIndex: number;
+  @Input() tabs: Array<string>;
   @Input() theme: string;
   private searchIndex: number = 0;
   private totalSearchCount: number = 0;
@@ -28,7 +28,8 @@ export class Header {
   private settingOpened: boolean = false;
   private elementRef;
 
-  @Output() newTheme: EventEmitter<string> = new EventEmitter<string>();
+  @Output() themeChange: EventEmitter<string> = new EventEmitter<string>();
+  @Output() tabChange: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(
     private userActions: UserActions,
@@ -47,7 +48,7 @@ export class Header {
   }
 
   ngOnChanges() {
-    if (this.searchDisabled) {
+    if (this.selectedTabIndex !== 0) {
       this.query = '';
     }
   }
@@ -79,10 +80,10 @@ export class Header {
     this.settingOpened = !this.settingOpened;
   }
 
-  themeChange(theme, selected) {
+  changeTheme(theme, selected) {
     if (selected) {
       this.theme = theme;
-      this.newTheme.emit(this.theme);
+      this.themeChange.emit(this.theme);
     }
     this.resetTheme();
   }

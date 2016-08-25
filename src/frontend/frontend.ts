@@ -5,8 +5,8 @@ import {
   enableProdMode,
 } from '@angular/core';
 import * as Rx from 'rxjs';
-import AppTrees from './components/app-trees/app-trees';
 import SplitPane from './components/split-pane/split-pane';
+import TabMenu from './components/tab-menu/tab-menu';
 import { BackendActions } from './actions/backend-actions/backend-actions';
 import { BackendMessagingService } from './channel/backend-messaging-service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -15,11 +15,12 @@ import { Dispatcher } from './dispatcher/dispatcher';
 import { FormsModule } from '@angular/forms';
 import { Header } from './components/header/header';
 import { InfoPanel } from './components/info-panel/info-panel';
+import { ParseUtils } from './utils/parse-utils';
+import { RouterTree } from './components/router-tree/router-tree';
 import { TreeView } from './components/tree-view/tree-view';
 import { UserActionType } from './actions/action-constants';
 import { UserActions } from './actions/user-actions/user-actions';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { ParseUtils } from './utils/parse-utils';
 
 const BASE_STYLES = require('!style!css!postcss!../styles/app.css');
 
@@ -30,26 +31,53 @@ const ALLOWED_DEPTH: number = 3;
 @Component({
   selector: 'bt-app',
   providers: [ParseUtils],
-  directives: [AppTrees, Header, InfoPanel, SplitPane, TreeView],
+  directives: [
+    Header,
+    InfoPanel,
+    RouterTree,
+    SplitPane,
+    TabMenu,
+    TreeView
+  ],
   template: `
     <div class="clearfix vh-100 overflow-hidden flex flex-column"
       [ngClass]="theme">
       <augury-header
-        [searchDisabled]="searchDisabled"
-        [theme]="theme"
-        (newTheme)="themeChanged($event)">
-      </augury-header>
-      <bt-app-trees class="flex flex-column flex-auto"
+        [tabs]="tabs"
         [selectedTabIndex]="selectedTabIndex"
-        [selectedNode]="selectedNode"
-        [closedNodes]="closedNodes"
-        [routerTree]="routerTree"
-        [tree]="tree"
         [theme]="theme"
-        [changedNodes]="changedNodes"
-        [allowedComponentTreeDepth]="allowedComponentTreeDepth"
+        (themeChange)="themeChange($event)"
         (tabChange)="tabChange($event)">
-      </bt-app-trees>
+      </augury-header>
+      <split-pane
+         class="flex-auto"
+         [ngClass]="{ 'flex': selectedTabIndex === 0 }"
+         [hidden]="selectedTabIndex !== 0">
+        <split-pane-primary-content class="flex flex-column flex-auto">
+          <bt-tree-view
+             class="flex"
+             [changedNodes]="changedNodes"
+             [selectedNode]="selectedNode"
+             [closedNodes]="closedNodes"
+             [tree]="tree"
+             [allowedComponentTreeDepth]="allowedComponentTreeDepth">
+          </bt-tree-view>
+        </split-pane-primary-content>
+        <split-pane-secondary-content class="flex flex-column flex-auto">
+          <bt-info-panel
+             class="flex flex-column flex-auto bg-white"
+             [tree]="tree"
+             [theme]="theme"
+             [node]="selectedNode">
+          </bt-info-panel>
+        </split-pane-secondary-content>
+      </split-pane>
+      <bt-router-tree
+         class="overflow-scroll flex-auto"
+         [theme]="theme"
+         [hidden]="selectedTabIndex !== 1"
+         [routerTree]="routerTree">
+      </bt-router-tree>
     </div>`
 })
 /**
@@ -64,9 +92,13 @@ export class App {
   private selectedNode: any;
   private closedNodes: Array<any> = [];
   private changedNodes: any = [];
-  private searchDisabled: boolean = false;
   private theme: string;
   private allowedComponentTreeDepth: number = ALLOWED_DEPTH;
+
+  private tabs = [
+    'Component Tree',
+    'Router Tree',
+  ];
 
   constructor(
     private backendAction: BackendActions,
@@ -147,16 +179,13 @@ export class App {
     this.selectedTabIndex = index;
     if (index === 1) {
       this.userActions.renderRouterTree();
-      this.searchDisabled = true;
-    } else {
-      this.searchDisabled = false;
     }
   }
 
-  themeChanged(newTheme: string): void {
-    this.theme = newTheme;
+  themeChange(theme: string): void {
+    this.theme = theme;
     // Set the new theme
-    chrome.storage.sync.set({ theme: newTheme });
+    chrome.storage.sync.set({ theme });
   }
 }
 

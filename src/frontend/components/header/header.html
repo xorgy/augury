@@ -1,77 +1,96 @@
-<div class="flex flex-column flex-stretch col-12">
-  <header class="flex flex-justify bg-panel border-bottom py3 px3">
-    <h4 class="regular flex flex-center primary-color m0">
-      <img src="../images/augury-logo.svg"
-        class="mr2"
-        style="width: 18px; height: 18px;">
-        Augury
-    </h4>
-    <div class="flex">
-      <div class="flex flex-center border rounded border-color-dark bg-white mr3"
-        [ngClass]="{'disabled-color': searchDisabled}">
-        <!-- SEARCH -->
-        <input class="outline border-none bg-white flex-auto primary-color"
-          [ngClass]="{'bg-panel disabled-color': searchDisabled}"
-          placeholder="Find Component"
-          type="text"
-          (keyup)="onKey($event)"
-          [disabled]="searchDisabled"
-          [(ngModel)]="query">
-        <div class="bg-white right-align pr2"
-          style="min-width:50px">
-          <span class="h4 regular primary-color"
-            *ngIf="totalSearchCount > 0 && query.length > 0">
-            {{searchIndex + 1}} of {{totalSearchCount}}
+<bt-tab-menu
+   [tabs]="tabs"
+   (tabChange)="tabChange.emit($event)"
+   [selectedTabIndex]="selectedTabIndex">
+  <h4 prelude class="regular flex left-align primary-color m0" style="padding: 5px;">
+    <img
+       src="../images/augury-logo.svg"
+       class="mr2"
+       width="18px" height="18px">
+    Augury
+  </h4>
+  <div postlude>
+    <header class="flex flex-justify right-align py1 px3">
+      <div class="flex">
+        <div
+           class="flex flex-center border rounded bg-white"
+           [ngClass]="{ 'disabled-color': selectedTabIndex !== 0 }"
+           style="height: 19.5px;">
+          <!-- SEARCH -->
+          <input
+             class="outline border-none bg-white flex-auto primary-color"
+             [ngClass]="{ 'bg-panel disabled-color': selectedTabIndex !== 0 }"
+             placeholder="Find Component"
+             type="text"
+             (keyup)="onKey($event)"
+             [disabled]="selectedTabIndex !== 0"
+             [(ngModel)]="query">
+          <div
+             class="bg-white right-align pr2"
+             style="min-width:50px">
+            <span
+               class="h4 regular primary-color"
+               *ngIf="totalSearchCount > 0 && query.length > 0">
+              {{searchIndex + 1}} of {{totalSearchCount}}
             </span>
-        </div>
-        <div class="right-align border-left">
-          <div class="inline-block">
-            <button class="outline border-none btn-primary primary-color bg-panel pointer py2"
-              (click)="onKey($event, false)">
-              <img src="../images/Triangle.svg"
-                class="rotate180"
-                style="width: 0.8em; height: 0.8em;">
-            </button>
           </div>
-          <div class="border-left inline-block"
-            style="margin-left: -4px">
-            <button class="outline border-none border-left btn-primary primary-color bg-panel pointer py2"
-              (click)="onKey($event, true)">
-              <img src="../images/Triangle.svg"
-                style="width: 0.8em; height: 0.8em;">
-            </button>
+          <div class="right-align border-left">
+            <div class="inline-block">
+              <button
+                 class="outline border-none btn-primary primary-color bg-panel pointer py1"
+                 (click)="onKey($event, false)">
+                <img
+                   src="../images/Triangle.svg"
+                   class="rotate180"
+                   style="width: 0.6em; height: 0.7em;">
+              </button>
+            </div>
+            <div
+               class="border-left inline-block"
+               style="margin-left: -4px">
+              <button
+                 class="outline border-none btn-primary primary-color bg-panel pointer py1"
+                 (click)="onKey($event, true)">
+                <img
+                   src="../images/Triangle.svg"
+                   style="width: 0.6em; height: 0.7em;">
+              </button>
+            </div>
           </div>
         </div>
+        <!-- SETTING -->
+        <div
+           class="icon setting"
+           id="augury-theme-menu-button"
+           (click)="openSettings()"></div>
       </div>
-
-      <!-- SETTING -->
-      <div class="icon setting" id="augury-theme-menu-button"
-        (click)="openSettings()"></div>
-    </div>
-  </header>
-
-  <form>
-    <ul id="augury-theme-menu" class="setting-dropdown list-reset border border-dark rounded bg-silver absolute right-0" *ngIf="settingOpened">
-      <li class="p3 border-bottom border-dark">
-        <label>
-          <input
-             type="radio"
-             #lightTheme
-             [checked]="theme==='light'"
-             (change)="themeChange('light', lightTheme.checked)"
-             name="theme"
-             value="light">Light Mode</label>
-      </li>
-      <li class="p3">
-        <label>
-          <input
-             type="radio"
-             #darkTheme
-             [checked]="theme==='dark'"
-             (change)="themeChange('dark', darkTheme.checked)"
-             name="theme"
-             value="dark">Dark Mode</label>
-      </li>
-    </ul>
-  </form>
-</div>
+    </header>
+    <form>
+      <ul
+         id="augury-theme-menu"
+         class="setting-dropdown list-reset border border-dark rounded bg-silver absolute right-0"
+         *ngIf="settingOpened">
+        <li class="p3 border-bottom border-dark">
+          <label>
+            <input
+               type="radio"
+               #lightTheme
+               [checked]="theme==='light'"
+               (change)="changeTheme('light', lightTheme.checked)"
+               name="theme"
+               value="light">Light Mode</label>
+        </li>
+        <li class="p3">
+          <label>
+            <input
+               type="radio"
+               #darkTheme
+               [checked]="theme==='dark'"
+               (change)="changeTheme('dark', darkTheme.checked)"
+               name="theme"
+               value="dark">Dark Mode</label>
+        </li>
+      </ul>
+    </form>
+  </div>
+</bt-tab-menu>

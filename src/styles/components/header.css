@@ -3,9 +3,9 @@
 
 .setting {
   -webkit-mask-position: -200px -29px;
-  height: 16px;
-  margin: auto;
-  width: 16px;
+  height: 19.5px;
+  margin: auto 6px;
+  width: 19.5px;
 }
 
 .setting-dropdown li {

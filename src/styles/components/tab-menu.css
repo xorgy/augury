@@ -13,14 +13,31 @@ bt-tab-menu header {
 }
 
 .light {
+  & .tab-menu-title {
+    color: #5A5A5A;
+
+    &.selected {
+      color: #333;
+    }
+  }
+
   & .tab-menu-title:hover {
     background-color: var(--grey-medium);
+    color: #333;
   }
 }
 
 .dark {
+  & .tab-menu-title {
+    color: #A5A5A5;
+
+    & .selected {
+      color: #CCCCCC;
+    }
+  }
+
   & .tab-menu-title:hover {
-    color: rgb(204, 204, 204);
-    background-color: rgb(49, 49, 49);
+    color: #CCCCCC;
+    background-color: #313131;
   }
 }
