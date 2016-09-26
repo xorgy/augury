@@ -11,7 +11,7 @@ import {
   template: `
   <div class="row">
     <div class="col-md-3">
-      <ul class="nav nav-pills nav-stacked">
+      <ul class="nav nav-pills">
       <li [ngClass]="{active: path==''}">
         <a [routerLink]="['/']">Home</a>
       </li>
